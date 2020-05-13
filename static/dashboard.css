@@ -1,0 +1,98 @@
+
+@font-face {
+    font-family: 'Barlow';
+    src: url('fonts/Barlow-Regular.eot');
+    src: url('fonts/Barlow-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Barlow-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+main {
+    font-family: Barlow; 
+}
+
+div.node {
+    height: 240px;
+    width: 320px;
+    display: inline-block;
+    margin: 20px;
+    background-color: #eee;
+    vertical-align: top;
+}
+
+div.component {
+    height: 24px;
+    width: 300px;
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    vertical-align: top;
+}
+
+div.meta {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+div.meta span.nodeId {
+    font-weight: bold;
+}
+
+div.meta span {
+    margin: 5px;
+}
+
+div.component span {
+    display: inline-block;
+    margin: 2px;
+}
+
+div.component span.status {
+    width: 65px;
+}
+
+div.component span.req {
+    width: 55px;
+}
+
+.color-0 {
+    background-color: #ABBEEB;
+}
+
+.color-1 {
+    background-color: #fff4e4;
+}
+
+.color-2 {
+    background-color: #f7e8a4;
+}
+
+.color-3 {
+    background-color: #fcb97d;
+}
+
+.color-4 {
+    background-color: #c6b89e;
+}
+
+.color-5 {
+    background-color: #aaba9e;
+}
+
+.color-6 {
+    background-color: #f8bae5;
+}
+
+.color-7 {
+    background-color: #e0c1b3;
+}
+
+.color-8 {
+    background-color: #ade969;
+}
+
+.color-9 {
+    background-color: #6efafb;
+}
