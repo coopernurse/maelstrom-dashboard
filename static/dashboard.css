@@ -12,28 +12,66 @@ main {
     font-family: Barlow; 
 }
 
-div.node {
-    height: 240px;
-    width: 320px;
+div.top {
+    padding: 0.5rem;
+}
+
+div.top span.title {
+    font-weight: bold;
+    font-size: 2rem;
+    width: 24rem;
     display: inline-block;
-    margin: 20px;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+div.top span.stats {
+}
+
+span.stat {
+    display: inline-block;
+    margin-right: 1rem;
+    background-color: #eee;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+span.stat span.value {
+    display: block;    
+    text-align: center;
+    vertical-align: top;
+}
+
+span.stat span.label {
+    display: block;    
+    text-align: center;
+    vertical-align: bottom;
+}
+
+div.node {
+    width: 24rem;
+    display: inline-block;
+    margin: 0.5rem;
+    padding: 0.5rem;    
     background-color: #eee;
     vertical-align: top;
+    border-radius: 0.5rem;
 }
 
 div.component {
-    height: 24px;
-    width: 300px;
+    width: 22.5rem;
     display: inline-block;
-    margin-top: 5px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+    padding: 0.25rem;
     vertical-align: top;
+    border-radius: 0.25rem;
 }
 
 div.meta {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
 }
 
 div.meta span.nodeId {
@@ -41,20 +79,19 @@ div.meta span.nodeId {
 }
 
 div.meta span {
-    margin: 5px;
+    margin: 0.25rem;
 }
 
 div.component span {
     display: inline-block;
-    margin: 2px;
 }
 
 div.component span.status {
-    width: 65px;
+    width: 4.5rem;
 }
 
 div.component span.req {
-    width: 55px;
+    width: 4rem;
 }
 
 .color-0 {

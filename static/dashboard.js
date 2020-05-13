@@ -12,24 +12,60 @@ function MaelDashUI(config) {
     var ui = {};
 
     var nodes = [];
+    var workerNodes = [];
+    var stats = {
+        containers: 0,
+        reqPerSecond: 0,
+        previousPollTime: null,
+        previousReqCount: {}
+    };
 
     var colorsByName = {};
     var colorIdx = 0;
     
     var getStatus = function() {
+        var i, j;
+        var pollTime = new Date().getTime();
         m.request({
             url: "/rpc/nodestatus",
         }).then(function(data) {
+            var containers = 0;
+            var totalRequests = 0;            
+            var reqCountById = {};
+            var id, comp, seconds;
+            
             if (data.result.nodes) {
                 nodes = data.result.nodes;
+                workerNodes = filterWorkerNodes(nodes);
+                
                 // sort nodes by start time
                 nodes.sort(function (a, b) { return (a.startedAt < b.startedAt) ? -1 : 1; });
+
+                // compute # containers and requests per second
+                for (i = 0; i < nodes.length; i++) {
+                    for (j = 0; j < nodes[i].runningComponents.length; j++) {
+                        comp = nodes[i].runningComponents[j];
+                        id = comp.componentName + "_" + comp.startTime;
+                        prevReqCount = stats.previousReqCount[id];
+                        totalRequests += (prevReqCount > 0) ? comp.totalRequests - prevReqCount : comp.totalRequests;
+                        reqCountById[id] = comp.totalRequests;
+                        containers++;
+                    }
+                }
+
+                if (stats.previousPollTime) {
+                    seconds = (pollTime - stats.previousPollTime) / 1000.0;
+                    stats.reqPerSecond = Math.round((totalRequests / seconds) * 10) / 10;
+                }
+                stats.containers = containers;
+                stats.previousPollTime = pollTime;
+                stats.previousReqCount = reqCountById;
             }
             setTimeout(getStatus, config.refreshMillis);
         });
     };
 
-    var filterNodes = function() {
+    var filterWorkerNodes = function() {
         return _.filter(nodes, function(n) { return config.showZeroRamNodes || n.totalMemoryMiB > 0; });
     };
 
@@ -77,6 +113,13 @@ function MaelDashUI(config) {
         ];
     };
 
+    var renderStat = function(label, value) {
+        return m("span", {class: "stat"}, [
+            m("span", {class: "label"}, label),
+            m("span", {class: "value"}, value)
+        ]);
+    };
+
     var renderNode = function(node) {
         var components = node.runningComponents;
 
@@ -102,10 +145,16 @@ function MaelDashUI(config) {
     
     ui.Dashboard = {
         view: function() {
-            return m("main", _.concat(
-                [ m("h1", {class: "title"}, "maelstrom dashboard") ],
-                _.map(filterNodes(), renderNode)
-            ))
+            return m("main", _.concat([
+                m("div", {class: "top"}, [
+                    m("span", {class: "title"}, "maelstrom dashboard"),
+                    m("span", {class: "stats"}, [
+                        renderStat("nodes", workerNodes.length),
+                        renderStat("containers", stats.containers),
+                        renderStat("rps", stats.reqPerSecond)
+                    ])
+                ])
+            ], _.map(workerNodes, renderNode)));
         }
     };
 
