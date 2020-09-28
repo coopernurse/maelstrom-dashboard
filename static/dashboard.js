@@ -7,6 +7,20 @@ function MaelConfig(opts) {
     };
 }
 
+function FormattedRunTime(startTime) {
+	const now = new Date();
+	secondsRunning = Math.round((now - startTime)/1000);
+	if (secondsRunning > 86400) {
+	    return Math.round(secondsRunning * 100 / 86400)/100 + "d";
+	} else if (secondsRunning > 3600) {
+		return Math.round(secondsRunning * 100 / 3600)/100 + "h";
+	} else if (secondsRunning > 60) {
+		return Math.round(secondsRunning * 100 / 60)/100 + "m";
+	} else {
+		return secondsRunning + "s";
+	}
+}
+
 function MaelDashUI(config) {
 
     var ui = {};
@@ -137,6 +151,7 @@ function MaelDashUI(config) {
                 return m("div", {class: "component " + componentClasses(c).join(" ")}, [
                     m("span", {class: "status"}, c.status),
                     m("span", {class: "req"}, c.totalRequests),                    
+                    m("span", {class: "time"}, FormattedRunTime(c.startTime)),
                     m("span", {class: "name"}, c.componentName)
                 ])
             }))
