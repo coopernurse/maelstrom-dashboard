@@ -87,11 +87,15 @@ div.component span {
 }
 
 div.component span.status {
-    width: 4.5rem;
+    width: 4rem;
 }
 
 div.component span.req {
-    width: 4rem;
+    width: 3rem;
+}
+
+div.component span.time {
+	width: 3rem;
 }
 
 .color-0 {
