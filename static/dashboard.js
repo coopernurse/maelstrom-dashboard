@@ -11,11 +11,11 @@ function FormattedRunTime(startTime) {
 	const now = new Date();
 	secondsRunning = Math.round((now - startTime)/1000);
 	if (secondsRunning > 86400) {
-	    return Math.round(secondsRunning * 100 / 86400)/100 + "d";
+	    return Math.round(secondsRunning * 10 / 86400)/10 + "d";
 	} else if (secondsRunning > 3600) {
-		return Math.round(secondsRunning * 100 / 3600)/100 + "h";
+		return Math.round(secondsRunning * 10 / 3600)/10 + "h";
 	} else if (secondsRunning > 60) {
-		return Math.round(secondsRunning * 100 / 60)/100 + "m";
+		return Math.round(secondsRunning * 10 / 60)/10 + "m";
 	} else {
 		return secondsRunning + "s";
 	}
