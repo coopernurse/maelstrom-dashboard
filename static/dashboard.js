@@ -140,7 +140,6 @@ function MaelDashUI(config) {
         // sort components by name, then start time
         components.sort(function (a, b) { return (a.componentName == b.componentName) ?
                                           ((a.startTime < b.startTime) ? -1 : 1) : ((a.componentName < b.componentName) ? -1 : 1); });
-        console.log(node);
         return m("div", {class: "node " + nodeClasses(node).join(" ")}, [
             m("div", {class: "meta"}, [
                 m("span", {class: "nodeId"}, node.nodeId.substr(0, 4)),
