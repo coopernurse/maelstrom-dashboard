@@ -74,7 +74,7 @@ div.meta {
     margin-bottom: 0.5rem;
 }
 
-div.meta span.nodeId {
+div.meta div span.nodeId {
     font-weight: bold;
 }
 
