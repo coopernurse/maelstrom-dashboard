@@ -140,12 +140,15 @@ function MaelDashUI(config) {
         // sort components by name, then start time
         components.sort(function (a, b) { return (a.componentName == b.componentName) ?
                                           ((a.startTime < b.startTime) ? -1 : 1) : ((a.componentName < b.componentName) ? -1 : 1); });
+        console.log(node);
         return m("div", {class: "node " + nodeClasses(node).join(" ")}, [
             m("div", {class: "meta"}, [
                 m("span", {class: "nodeId"}, node.nodeId.substr(0, 4)),
                 m("span", {class: "time"}, "up: " + moment.duration(new Date().getTime()-node.startedAt).humanize()),                
                 m("span", {class: "load"}, "load: " + node.loadAvg1m),
-                m("span", {class: "ram"}, "ram: " + Math.round(nodeRamPctUsed(node) * 100) + "%")
+                m("span", {class: "ram"}, "ram: " + Math.round(nodeRamPctUsed(node) * 100) + "%"),
+                m("span", {class: "status"}, "cpu: " + node.numCPUs),
+                m("span", {class: "ip"}, "ip: " + node.peerUrl.split('/')[2].split(':')[0])
             ]),
             m("div", {class: "components"}, _.map(components, function(c) {
                 return m("div", {class: "component " + componentClasses(c).join(" ")}, [
