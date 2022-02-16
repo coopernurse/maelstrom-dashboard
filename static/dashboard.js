@@ -147,6 +147,10 @@ function MaelDashUI(config) {
                 m("span", {class: "load"}, "load: " + node.loadAvg1m),
                 m("span", {class: "ram"}, "ram: " + Math.round(nodeRamPctUsed(node) * 100) + "%")
             ]),
+            m("div", {class: "meta"}, [
+                m("span", {class: "cpus"}, "cpus: " + node.numCPUs),
+                m("span", {class: "ip"}, "ip: " + node.peerUrl.split('/')[2].split(':')[0])
+            ]),
             m("div", {class: "components"}, _.map(components, function(c) {
                 return m("div", {class: "component " + componentClasses(c).join(" ")}, [
                     m("span", {class: "status"}, c.status),
